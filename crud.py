@@ -25,7 +25,7 @@ def get_employees(db: Session):
     return db.query(models.Employee).all()
 
 # Update Employee
-def update_employee(db: Session, employee_id: str, employee: schemas.EmployeeUpdate):
+def update_employee(db: Session, employee_id: int, employee: schemas.EmployeeUpdate):
 
     db_employee = db.query(models.Employee).filter(
         models.Employee.id == employee_id

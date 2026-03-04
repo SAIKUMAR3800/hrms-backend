@@ -45,7 +45,7 @@ def get_employees(db: Session = Depends(get_db)):
     return crud.get_employees(db)
 
 @app.put("/employees/{employee_id}", response_model=schemas.EmployeeResponse)
-def update_employee(employee_id: str, employee: schemas.EmployeeUpdate, db: Session = Depends(get_db)):
+def update_employee(employee_id: int, employee: schemas.EmployeeUpdate, db: Session = Depends(get_db)):
     return crud.update_employee(db, employee_id, employee)
 
 @app.delete("/employees/{employee_id}")
