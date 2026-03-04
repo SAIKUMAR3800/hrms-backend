@@ -18,7 +18,12 @@ class EmployeeResponse(BaseModel):
     class Config:
         orm_mode = True
 
-
+class EmployeeUpdate(BaseModel):
+    employee_id: str
+    full_name: str
+    email: EmailStr
+    department: str
+    
 class AttendanceCreate(BaseModel):
     employee_id: str
     date: date

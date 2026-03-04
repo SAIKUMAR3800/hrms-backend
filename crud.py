@@ -24,6 +24,25 @@ def create_employee(db: Session, employee: schemas.EmployeeCreate):
 def get_employees(db: Session):
     return db.query(models.Employee).all()
 
+# Update Employee
+def update_employee(db: Session, employee_id: int, employee: schemas.EmployeeUpdate):
+
+    db_employee = db.query(models.Employee).filter(
+        models.Employee.id == employee_id
+    ).first()
+
+    if not db_employee:
+        raise HTTPException(status_code=404, detail="Employee not found")
+
+    db_employee.employee_id = employee.employee_id
+    db_employee.full_name = employee.full_name
+    db_employee.email = employee.email
+    db_employee.department = employee.department
+
+    db.commit()
+    db.refresh(db_employee)
+
+    return db_employee
 
 # Delete Employee
 def delete_employee(db: Session, employee_id: int):
